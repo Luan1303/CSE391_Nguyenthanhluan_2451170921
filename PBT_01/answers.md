@@ -70,7 +70,6 @@ Các lỗi có trong bài là:
   <!-- HEADER: landmark "banner" -->
   <header>
     <a href="/" aria-label="Về trang chủ"><!-- Logo --></a>
-
     <!-- NAV: landmark "navigation" -->
     <nav aria-label="Điều hướng chính">
       <ul>
@@ -79,7 +78,6 @@ Các lỗi có trong bài là:
         <li><a href="/phu-kien">Phụ kiện</a></li>
       </ul>
     </nav>
-
     <!-- SEARCH: thẻ <search> HTML5 -->
     <search>
       <label for="q">Tìm kiếm</label>
@@ -101,7 +99,6 @@ Các lỗi có trong bài là:
       <!-- ARTICLE: nội dung độc lập, có thể chia sẻ riêng lẻ -->
       <article>
         <h1>Apple iPhone 16</h1>
-
         <!-- FIGURE: nhóm ảnh có chú thích -->
         <figure>
           <img src="" alt="iPhone 16 màu đen, mặt trước" width="600" height="600" />
@@ -114,7 +111,6 @@ Các lỗi có trong bài là:
           </ul>
           <figcaption>Bộ ảnh chính thức iPhone 16 — 5 góc chụp</figcaption>
         </figure>
-
         <!-- SECTION: nhóm thông tin giá/đánh giá -->
         <section aria-labelledby="info-heading">
           <h2 id="info-heading">Thông tin sản phẩm</h2>
@@ -127,7 +123,6 @@ Các lỗi có trong bài là:
             <span>(1.284 đánh giá)</span>
           </p>
           <p>iPhone 16 với chip A18, camera 48MP, màn hình 6.1 inch, pin 3.561 mAh.</p>
-
           <!-- FIELDSET: nhóm radio có ngữ cảnh cho screen reader -->
           <fieldset>
             <legend>Dung lượng</legend>
@@ -135,11 +130,9 @@ Các lỗi có trong bài là:
             <label><input type="radio" name="storage" value="256gb" /> 256 GB</label>
             <label><input type="radio" name="storage" value="512gb" /> 512 GB</label>
           </fieldset>
-
           <button type="button">Thêm vào giỏ hàng</button>
           <button type="button">Mua ngay</button>
         </section>
-
         <!-- SECTION + TABLE: dữ liệu quan hệ 2 chiều -->
         <section aria-labelledby="specs-heading">
           <h2 id="specs-heading">Thông số kỹ thuật</h2>
@@ -160,25 +153,21 @@ Các lỗi có trong bài là:
             </tbody>
           </table>
         </section>
-
         <!-- SECTION: reviews — mỗi review là <article> độc lập -->
         <section aria-labelledby="reviews-heading">
           <h2 id="reviews-heading">Đánh giá từ khách hàng</h2>
-
           <article>
             <h3>Sản phẩm tốt, giao hàng nhanh</h3>
             <address>Nguyễn Văn A</address>
             <time datetime="2025-04-10">10 tháng 4, 2025</time>
             <p>Máy đẹp, hiệu năng mượt, pin dùng được cả ngày...</p>
           </article>
-
           <article>
             <h3>Hài lòng với camera</h3>
             <address>Trần Thị B</address>
             <time datetime="2025-04-08">8 tháng 4, 2025</time>
             <p>Camera chụp đêm cải thiện rõ rệt so với đời trước...</p>
           </article>
-
           <!-- FORM: gửi dữ liệu người dùng lên server -->
           <form method="post" action="/reviews">
             <h3>Viết đánh giá của bạn</h3>
@@ -189,9 +178,7 @@ Các lỗi có trong bài là:
             <button type="submit">Gửi đánh giá</button>
           </form>
         </section>
-
       </article>
-
       <!-- ASIDE: nội dung bổ sung, landmark "complementary" -->
       <aside aria-labelledby="related-heading">
         <h2 id="related-heading">Sản phẩm tương tự</h2>
@@ -216,7 +203,6 @@ Các lỗi có trong bài là:
           </li>
         </ul>
       </aside>
-
     </div>
   </main>
   <!-- FOOTER: landmark "contentinfo" -->
