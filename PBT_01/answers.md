@@ -67,9 +67,8 @@ Các lỗi có trong bài là:
 
 # PHẦN C - SUY LUẬN:
 ## Câu C1:
-  <!-- HEADER: landmark "banner" -->
-  <header>
-    
+  
+  <!-- HEADER: landmark "banner" --> 
     <a href="/" aria-label="Về trang chủ"><!-- Logo --></a>
     <!-- NAV: landmark "navigation" -->
     <nav aria-label="Điều hướng chính">
@@ -79,16 +78,13 @@ Các lỗi có trong bài là:
         <li><a href="/phu-kien">Phụ kiện</a></li>
       </ul>
     </nav>
-    <!-- SEARCH: thẻ <search> HTML5 -->
-    
+    <!-- SEARCH: thẻ <search> HTML5 -->  
     <search>
       <label for="q">Tìm kiếm</label>
       <input id="q" type="search" placeholder="Tìm sản phẩm..." />
       <button type="submit">Tìm</button>
     </search>
-  </header>
    <!-- Breadcrumb điều hướng -->
-    
     <nav aria-label="breadcrumb"> <!-- nav vì đây là điều hướng -->
         <ol> <!-- ol vì breadcrumb có thứ tự -->
             <li><a href="#">Trang chủ</a></li>
@@ -97,13 +93,9 @@ Các lỗi có trong bài là:
         </ol>
     </nav>
   <!-- MAIN: landmark "main", chỉ 1 trên trang -->
-  
-  <main>
-
     <div class="layout-product-page"> <!-- div: wrapper layout thuần túy -->
       <!-- ARTICLE: nội dung độc lập, có thể chia sẻ riêng lẻ -->
-      <article>
-        
+      <article>  
         <h1>Apple iPhone 16</h1>
         <!-- FIGURE: nhóm ảnh có chú thích -->
         <figure>
@@ -118,7 +110,6 @@ Các lỗi có trong bài là:
           <figcaption>Bộ ảnh chính thức iPhone 16 — 5 góc chụp</figcaption>
         </figure>
         <!-- SECTION: nhóm thông tin giá/đánh giá -->
-        
         <section aria-labelledby="info-heading">
           <h2 id="info-heading">Thông tin sản phẩm</h2>
           <p>Giá: <strong>22.990.000 đ</strong></p>
@@ -141,7 +132,6 @@ Các lỗi có trong bài là:
           <button type="button">Mua ngay</button>
         </section>
         <!-- SECTION + TABLE: dữ liệu quan hệ 2 chiều -->
-        
         <section aria-labelledby="specs-heading">
           <h2 id="specs-heading">Thông số kỹ thuật</h2>
           <table>
@@ -162,7 +152,6 @@ Các lỗi có trong bài là:
           </table>
         </section>
         <!-- SECTION: reviews — mỗi review là <article> độc lập -->
-        
         <section aria-labelledby="reviews-heading">
           <h2 id="reviews-heading">Đánh giá từ khách hàng</h2>
           <article>
@@ -178,7 +167,6 @@ Các lỗi có trong bài là:
             <p>Camera chụp đêm cải thiện rõ rệt so với đời trước...</p>
           </article>
           <!-- FORM: gửi dữ liệu người dùng lên server -->
-          
           <form method="post" action="/reviews">
             <h3>Viết đánh giá của bạn</h3>
             <label for="review-title">Tiêu đề</label>
@@ -190,46 +178,31 @@ Các lỗi có trong bài là:
         </section>
       </article>
       <!-- ASIDE: nội dung bổ sung, landmark "complementary" -->
-      
       <aside aria-labelledby="related-heading">
         <h2 id="related-heading">Sản phẩm tương tự</h2>
         <ul>
           <li>
             <article>
-
               <a href="/iphone-15"><img src="" alt="iPhone 15" width="150" height="150" /><h3>iPhone 15</h3></a>
               <p><strong>19.990.000 đ</strong></p>
             </article>
           </li>
           <li>
-
             <article>
-
               <a href="/samsung-galaxy-s25"><img src="" alt="Samsung Galaxy S25" width="150" height="150" /><h3>Samsung Galaxy S25</h3></a>
               <p><strong>21.990.000 đ</strong></p>
-
             </article>
-
           </li>
-
           <li>
-
             <article>
               <a href="/pixel-9"><img src="" alt="Google Pixel 9" width="150" height="150" /><h3>Google Pixel 9</h3></a>
               <p><strong>18.990.000 đ</strong></p>
             </article>
           </li>
         </ul>
-     
       </aside>
-    
     </div>
-
-  </main>
-  <!-- FOOTER: landmark "contentinfo" -->
-  
-  <footer>
-    
+  <!-- FOOTER: landmark "contentinfo" -->  
     <address>Công ty TNHH Thương mại ABC — 123 Nguyễn Văn Linh, TP. HCM</address>
     <nav aria-label="Điều hướng footer">
       <ul>
@@ -239,10 +212,6 @@ Các lỗi có trong bài là:
       </ul>
     </nav>
     <small>© 2025 ABC Shop. All rights reserved.</small>
-  
-  </footer>
-
-
 
 ## Câu C2:
 
