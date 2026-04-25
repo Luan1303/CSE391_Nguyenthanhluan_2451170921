@@ -67,15 +67,6 @@ Các lỗi có trong bài là:
 
 # PHẦN C - SUY LUẬN:
 ## Câu C1:
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>iPhone 16 - Chi tiết sản phẩm</title>
-</head>
-<body>
-
   <!-- HEADER: landmark "banner" -->
   <header>
     <a href="/" aria-label="Về trang chủ"><!-- Logo --></a>
@@ -96,20 +87,17 @@ Các lỗi có trong bài là:
       <button type="submit">Tìm</button>
     </search>
   </header>
-
-  <!-- BREADCRUMB: <ol> vì có thứ tự -->
-  <nav aria-label="breadcrumb">
-    <ol>
-      <li><a href="/">Trang chủ</a></li>
-      <li><a href="/dien-thoai">Điện thoại</a></li>
-      <li aria-current="page">iPhone 16</li>
-    </ol>
-  </nav>
-
+   <!-- Breadcrumb điều hướng -->
+    <nav aria-label="breadcrumb"> <!-- nav vì đây là điều hướng -->
+        <ol> <!-- ol vì breadcrumb có thứ tự -->
+            <li><a href="#">Trang chủ</a></li>
+            <li><a href="#dien-thoai">Điện thoại</a></li>
+            <li aria-current="page">iPhone 16 Pro Max</li>
+        </ol>
+    </nav>
   <!-- MAIN: landmark "main", chỉ 1 trên trang -->
   <main>
     <div class="layout-product-page"> <!-- div: wrapper layout thuần túy -->
-
       <!-- ARTICLE: nội dung độc lập, có thể chia sẻ riêng lẻ -->
       <article>
         <h1>Apple iPhone 16</h1>
@@ -231,7 +219,6 @@ Các lỗi có trong bài là:
 
     </div>
   </main>
-
   <!-- FOOTER: landmark "contentinfo" -->
   <footer>
     <address>Công ty TNHH Thương mại ABC — 123 Nguyễn Văn Linh, TP. HCM</address>
@@ -245,8 +232,6 @@ Các lỗi có trong bài là:
     <small>© 2025 ABC Shop. All rights reserved.</small>
   </footer>
 
-</body>
-</html>
 
 
 ## Câu C2:
