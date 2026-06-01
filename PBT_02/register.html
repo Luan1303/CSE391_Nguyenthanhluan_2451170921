@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký tài khoản</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 24px; }
+        fieldset { margin-bottom: 20px; padding: 18px; }
+        legend { font-weight: bold; }
+        label { display: block; margin: 12px 0 4px; }
+        input, select, textarea { width: 100%; max-width: 420px; padding: 8px; font-size: 1rem; }
+        .radio-group { display: flex; gap: 16px; flex-wrap: wrap; }
+        .radio-group label { display: inline-flex; align-items: center; margin: 0; }
+        button { padding: 10px 16px; font-size: 1rem; margin-right: 12px; }
+    </style>
+</head>
+<body>
+    <h1>Đăng ký tài khoản E-Commerce</h1>
+    <form action="#" method="POST">
+        <fieldset>
+            <legend>Thông tin cá nhân</legend>
+            <label for="fullname">Họ tên</label>
+            <input id="fullname" name="fullname" type="text" placeholder="Nhập họ tên" required minlength="2" maxlength="50">
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+            <label for="phone">Số điện thoại</label>
+            <input id="phone" name="phone" type="tel" placeholder="0901234567" pattern="[0-9]{10}" title="Nhập đúng 10 chữ số">
+
+            <label for="dob">Ngày sinh</label>
+            <input id="dob" name="dob" type="date" placeholder="Chọn ngày sinh">
+        </fieldset>
+
+        <fieldset>
+            <legend>Tài khoản</legend>
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" placeholder="Tên đăng nhập 3-20 ký tự" pattern="^[A-Za-z0-9_]{3,20}$" title="Chỉ chữ, số và dấu gạch dưới, 3-20 ký tự" required>
+
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" placeholder="Mật khẩu ít nhất 8 ký tự" minlength="8" pattern="(?=.*[A-Z])(?=.*\d).{8,}" title="Ít nhất 8 ký tự, có ít nhất 1 chữ hoa và 1 số" required>
+
+            <label for="confirm_password">Xác nhận password</label>
+            <input id="confirm_password" name="confirm_password" type="password" placeholder="Nhập lại mật khẩu" minlength="8" pattern="(?=.*[A-Z])(?=.*\d).{8,}" title="Phải trùng password và ít nhất 8 ký tự" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Thông tin giao hàng</legend>
+            <label for="city">Thành phố</label>
+            <select id="city" name="city" required>
+                <option value="">Chọn thành phố</option>
+                <option value="HN">Hà Nội</option>
+                <option value="HCM">TP.HCM</option>
+                <option value="DN">Đà Nẵng</option>
+                <option value="CT">Cần Thơ</option>
+                <option value="HP">Hải Phòng</option>
+            </select>
+
+            <label for="district">Quận/Huyện</label>
+            <select id="district" name="district" required>
+                <option value="">Chọn quận/huyện</option>
+                <option value="ql1">Quận 1</option>
+                <option value="ql3">Quận 3</option>
+                <option value="phu_nhuan">Phú Nhuận</option>
+                <option value="binh_chanh">Bình Chánh</option>
+                <option value="tan_binh">Tân Bình</option>
+            </select>
+
+            <label for="address">Địa chỉ chi tiết</label>
+            <textarea id="address" name="address" rows="3" placeholder="Số nhà, tên đường, phường/xã" required></textarea>
+
+            <p>Giới tính</p>
+            <div class="radio-group">
+                <label><input type="radio" name="gender" value="male" required> Nam</label>
+                <label><input type="radio" name="gender" value="female"> Nữ</label>
+                <label><input type="radio" name="gender" value="other"> Khác</label>
+            </div>
+        </fieldset>
+
+        <label><input type="checkbox" name="agree" required> Tôi đồng ý với điều khoản và chính sách</label>
+
+        <button type="submit">Đăng ký</button>
+        <button type="reset">Reset</button>
+    </form>
+
+    <script>
+        const dobInput = document.getElementById('dob');
+        const today = new Date().toISOString().split('T')[0];
+        dobInput.max = today;
+    </script>
+</body>
+</html>
