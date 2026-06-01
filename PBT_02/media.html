@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Multimedia</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 24px; }
+        figure { margin: 18px 0; }
+        img { max-width: 100%; height: auto; display: block; }
+        figcaption { font-size: 0.95rem; color: #333; margin-top: 6px; }
+        .gallery { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+        .section { margin-bottom: 28px; }
+        iframe, video, audio { width: 100%; max-width: 720px; }
+        .logo { width: 80px; height: 80px; }
+    </style>
+</head>
+<body>
+    <h1>Giới thiệu sản phẩm</h1>
+
+    <section class="section">
+        <h2>Ảnh sản phẩm</h2>
+        <div class="gallery">
+            <figure>
+                <img src="https://via.placeholder.com/640x480.png?text=iPhone+16" alt="iPhone 16 màu đen với camera kép" loading="lazy" style="max-width: 100%; height: auto;">
+                <figcaption>iPhone 16 màu đen, mặt lưng bóng</figcaption>
+            </figure>
+            <figure>
+                <img src="https://via.placeholder.com/640x480.png?text=Smart+Watch" alt="Smartwatch màn hình tròn dây cao su xanh" loading="lazy" style="max-width: 100%; height: auto;">
+                <figcaption>Smartwatch thể thao, chống nước</figcaption>
+            </figure>
+            <figure>
+                <img src="https://via.placeholder.com/640x480.png?text=Tai+nghe" alt="Tai nghe không dây màu trắng kèm hộp sạc" loading="lazy" style="max-width: 100%; height: auto;">
+                <figcaption>Tai nghe không dây với hộp sạc tiện lợi</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>Video giới thiệu</h2>
+        <iframe width="720" height="405" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </section>
+
+    <section class="section">
+        <h2>Video sản phẩm</h2>
+        <video controls poster="https://via.placeholder.com/720x405.png?text=Poster+Video" style="max-width: 100%; height: auto;">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm">
+            Trình duyệt không hỗ trợ thẻ video.
+        </video>
+    </section>
+
+    <section class="section">
+        <h2>Âm thanh nền</h2>
+        <audio controls>
+            <source src="https://www.w3schools.com/html/horse.mp3" type="audio/mpeg">
+            Trình duyệt không hỗ trợ thẻ audio.
+        </audio>
+    </section>
+
+    <section class="section">
+        <h2>Logo SVG</h2>
+        <svg class="logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-labelledby="logoTitle logoDesc">
+            <title id="logoTitle">Logo cửa hàng</title>
+            <desc id="logoDesc">Hình tròn và chữ P cho thương hiệu</desc>
+            <circle cx="50" cy="50" r="45" fill="#0077cc" />
+            <text x="50" y="58" text-anchor="middle" font-size="42" fill="#fff" font-family="Arial, sans-serif">P</text>
+        </svg>
+    </section>
+</body>
+</html>
