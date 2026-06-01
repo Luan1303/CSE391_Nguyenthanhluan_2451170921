@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 24px; }
+        table { width: 100%; max-width: 760px; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ccc; padding: 10px; text-align: left; }
+        tfoot td { font-weight: bold; }
+        fieldset { margin-bottom: 22px; padding: 16px; }
+        legend { font-weight: bold; }
+        label { display: block; margin-bottom: 8px; }
+        input, select, textarea { width: 100%; max-width: 420px; padding: 8px; margin-bottom: 12px; font-size: 1rem; }
+        .radio-group { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 12px; }
+        .radio-group label { display: inline-flex; align-items: center; gap: 6px; margin: 0; }
+        button { padding: 10px 16px; font-size: 1rem; }
+    </style>
+</head>
+<body>
+    <h1>Checkout - Đặt hàng</h1>
+    <form action="#" method="POST">
+        <section>
+            <h2>Giỏ hàng</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Sản phẩm</th>
+                        <th>Đơn giá</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>iPhone 16</td>
+                        <td>25.990.000₫</td>
+                        <td>1</td>
+                        <td>25.990.000₫</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>AirPods Pro</td>
+                        <td>6.490.000₫</td>
+                        <td>1</td>
+                        <td>6.490.000₫</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Apple Watch</td>
+                        <td>9.990.000₫</td>
+                        <td>1</td>
+                        <td>9.990.000₫</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">Tổng cộng</td>
+                        <td>42.470.000₫</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <fieldset>
+            <legend>Thanh toán</legend>
+            <div class="radio-group">
+                <label><input type="radio" name="payment_method" value="cod" required> COD</label>
+                <label><input type="radio" name="payment_method" value="bank_transfer"> Chuyển khoản</label>
+                <label><input type="radio" name="payment_method" value="e_wallet"> Ví điện tử</label>
+            </div>
+
+            <label for="discount">Mã giảm giá</label>
+            <input id="discount" name="discount" type="text" placeholder="SALE2026" pattern="^SALE\d{4}$" title="Format SALE + 4 chữ số">
+
+            <label for="note">Ghi chú</label>
+            <textarea id="note" name="note" rows="3" placeholder="Ghi chú thêm (tùy chọn)"></textarea>
+        </fieldset>
+
+        <fieldset>
+            <legend>Thông tin giao hàng</legend>
+            <label for="fullname">Họ tên</label>
+            <input id="fullname" name="fullname" type="text" placeholder="Họ tên người nhận" required>
+
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+            <label for="phone">Số điện thoại</label>
+            <input id="phone" name="phone" type="tel" placeholder="0901234567" pattern="[0-9]{10}" title="Nhập 10 chữ số" required>
+
+            <label for="city">Thành phố</label>
+            <select id="city" name="city" required>
+                <option value="">Chọn thành phố</option>
+                <option value="HN">Hà Nội</option>
+                <option value="HCM">TP.HCM</option>
+                <option value="DN">Đà Nẵng</option>
+                <option value="CT">Cần Thơ</option>
+                <option value="HP">Hải Phòng</option>
+            </select>
+
+            <label for="district">Quận/Huyện</label>
+            <select id="district" name="district" required>
+                <option value="">Chọn quận/huyện</option>
+                <option value="ql1">Quận 1</option>
+                <option value="ql3">Quận 3</option>
+                <option value="phu_nhuan">Phú Nhuận</option>
+                <option value="binh_chanh">Bình Chánh</option>
+            </select>
+
+            <label for="address">Địa chỉ chi tiết</label>
+            <textarea id="address" name="address" rows="3" placeholder="Số nhà, đường, phường" required></textarea>
+
+            <label for="delivery_date">Ngày giao hàng mong muốn</label>
+            <input id="delivery_date" name="delivery_date" type="date" required>
+
+            <label for="delivery_slot">Khung giờ</label>
+            <select id="delivery_slot" name="delivery_slot" required>
+                <option value="">Chọn khung giờ</option>
+                <option value="morning">Sáng 8-12h</option>
+                <option value="afternoon">Chiều 14-18h</option>
+                <option value="evening">Tối 18-21h</option>
+            </select>
+
+            <label for="delivery_days">Thời gian giao hàng (ngày)</label>
+            <input id="delivery_days" name="delivery_days" type="range" min="1" max="7" step="1" value="3" aria-valuemin="1" aria-valuemax="7" aria-valuenow="3">
+            <output id="delivery_days_out">3 ngày</output>
+        </fieldset>
+
+        <button type="submit" aria-label="Xác nhận đặt hàng">Xác nhận đơn hàng</button>
+    </form>
+
+    <script>
+        const deliveryDate = document.getElementById('delivery_date');
+        const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+        deliveryDate.min = tomorrow;
+
+        const rangeInput = document.getElementById('delivery_days');
+        const output = document.getElementById('delivery_days_out');
+        output.textContent = rangeInput.value + ' ngày';
+        rangeInput.addEventListener('input', () => {
+            output.textContent = rangeInput.value + ' ngày';
+        });
+    </script>
+</body>
+</html>
