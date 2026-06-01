@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 24px;
+            line-height: 1.5;
+        }
+        form > div {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            max-width: 320px;
+            padding: 8px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 10px 18px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Validation Test Cases</h1>
+    <p>Submit form to view browser validation messages for each case.</p>
+    <form action="#" method="post">
+        <div>
+            <label for="case1">Case 1: required text input left empty</label>
+            <input id="case1" name="case1" type="text" required value="">
+        </div>
+        <div>
+            <label for="case2">Case 2: invalid email format</label>
+            <input id="case2" name="case2" type="email" value="abc">
+        </div>
+        <div>
+            <label for="case3">Case 3: number outside allowed range (1–10)</label>
+            <input id="case3" name="case3" type="number" min="1" max="10" value="15">
+        </div>
+        <div>
+            <label for="case4">Case 4: text fails pattern for 10 digits</label>
+            <input id="case4" name="case4" type="text" pattern="[0-9]{10}" value="abc123">
+        </div>
+        <div>
+            <label for="case5">Case 5: password shorter than minlength 8</label>
+            <input id="case5" name="case5" type="password" minlength="8" value="123">
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
