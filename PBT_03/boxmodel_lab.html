@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Model Lab - Phần B2</title>
+    <link rel="stylesheet" href="boxmodel.css">
+</head>
+<body>
+    <div class="section-title">
+        <h1>📊 Box Model Lab - Phần B2</h1>
+    </div>
+
+    <!-- PHẦN 1: Content-Box vs Border-Box -->
+    <div class="container">
+        <div class="section">
+            <h2>Phần 1: Content-Box vs Border-Box (Demonstration)</h2>
+            <p>Cùng width=300px, padding=20px, border=5px - nhưng box-sizing khác nhau</p>
+            
+            <div class="demo-container">
+                <!-- Box 1: Content-Box (mặc định) -->
+                <div class="box box-content">
+                    <h3>Hộp 1: content-box</h3>
+                    <p class="description">Width: 300px (content ONLY)</p>
+                    <p class="specs">padding: 20px | border: 5px</p>
+                    <p class="calculation">Tổng hiển thị: 300 + 40 + 10 = <strong>350px</strong></p>
+                </div>
+
+                <!-- Box 2: Border-Box -->
+                <div class="box box-border">
+                    <h3>Hộp 2: border-box</h3>
+                    <p class="description">Width: 300px (content + padding + border)</p>
+                    <p class="specs">padding: 20px | border: 5px</p>
+                    <p class="calculation">Content chính xác: 300 - 40 - 10 = <strong>250px</strong></p>
+                </div>
+            </div>
+
+            <div class="explanation">
+                <h3>💡 Giải thích:</h3>
+                <ul>
+                    <li><strong>content-box:</strong> width = chiều rộng nội dung, padding + border tính thêm</li>
+                    <li><strong>border-box:</strong> width = tổng nội dung + padding + border</li>
+                    <li>Mở DevTools (F12) → Inspect Element → Tab Computed để xem box model diagram</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- PHẦN 2: Layout 3 Cột -->
+        <div class="section">
+            <h2>Phần 2: Layout 3 Cột (1000px Container)</h2>
+            
+            <h3>Scenario A: KHÔNG dùng border-box (❌ Lỗi)</h3>
+            <div class="layout-without-borderbox">
+                <div class="sidebar-left">
+                    <h4>Cột Trái</h4>
+                    <p>Sidebar</p>
+                    <p><small>Width: 250px<br>Padding: 15px<br>Border: 1px</small></p>
+                </div>
+                <div class="content-middle">
+                    <h4>Cột Giữa</h4>
+                    <p>Main Content</p>
+                    <p><small>Width: 500px<br>Padding: 20px<br>Border: 1px</small></p>
+                </div>
+                <div class="sidebar-right">
+                    <h4>Cột Phải</h4>
+                    <p>Advertisement</p>
+                    <p><small>Width: 250px<br>Padding: 15px<br>Border: 1px</small></p>
+                </div>
+            </div>
+            <p class="warning">⚠️ <strong>Kết quả:</strong> Tổng > 1000px → Cột phải bị wrap xuống dòng!</p>
+
+            <h3>Scenario B: Dùng border-box (✅ Đúng)</h3>
+            <div class="layout-with-borderbox">
+                <div class="sidebar-left">
+                    <h4>Cột Trái</h4>
+                    <p>Sidebar</p>
+                    <p><small>Width: 250px<br>Padding: 15px<br>Border: 1px</small></p>
+                </div>
+                <div class="content-middle">
+                    <h4>Cột Giữa</h4>
+                    <p>Main Content</p>
+                    <p><small>Width: 500px<br>Padding: 20px<br>Border: 1px</small></p>
+                </div>
+                <div class="sidebar-right">
+                    <h4>Cột Phải</h4>
+                    <p>Advertisement</p>
+                    <p><small>Width: 250px<br>Padding: 15px<br>Border: 1px</small></p>
+                </div>
+            </div>
+            <p class="success">✅ <strong>Kết quả:</strong> Tổng = 1000px → Các cột xếp nằm ngang đúng!</p>
+
+            <div class="calculation-detail">
+                <h3>📐 Tính toán chi tiết (không dùng border-box):</h3>
+                <table class="calc-table">
+                    <tr>
+                        <th>Cột</th>
+                        <th>Width</th>
+                        <th>Padding</th>
+                        <th>Border</th>
+                        <th>Chiều rộng thực</th>
+                    </tr>
+                    <tr>
+                        <td>Trái</td>
+                        <td>250px</td>
+                        <td>15px × 2</td>
+                        <td>1px × 2</td>
+                        <td>250 + 30 + 2 = <strong>282px</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Giữa</td>
+                        <td>500px</td>
+                        <td>20px × 2</td>
+                        <td>1px × 2</td>
+                        <td>500 + 40 + 2 = <strong>542px</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Phải</td>
+                        <td>250px</td>
+                        <td>15px × 2</td>
+                        <td>1px × 2</td>
+                        <td>250 + 30 + 2 = <strong>282px</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"><strong>TỔNG:</strong></td>
+                        <td><strong>282 + 542 + 282 = 1106px ❌</strong></td>
+                    </tr>
+                </table>
+                <p style="color: red; font-weight: bold;">⚠️ Vượt 1000px lên 106px → cột phải bị wrap!</p>
+            </div>
+
+            <div class="calculation-detail">
+                <h3>📐 Tính toán chi tiết (dùng border-box):</h3>
+                <table class="calc-table">
+                    <tr>
+                        <th>Cột</th>
+                        <th>Width</th>
+                        <th>Bao gồm</th>
+                        <th>Chiều rộng thực</th>
+                    </tr>
+                    <tr>
+                        <td>Trái</td>
+                        <td>250px</td>
+                        <td>content + padding + border</td>
+                        <td><strong>250px</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Giữa</td>
+                        <td>500px</td>
+                        <td>content + padding + border</td>
+                        <td><strong>500px</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Phải</td>
+                        <td>250px</td>
+                        <td>content + padding + border</td>
+                        <td><strong>250px</strong></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><strong>TỔNG:</strong></td>
+                        <td>250 + 500 + 250</td>
+                        <td><strong>= 1000px ✅</strong></td>
+                    </tr>
+                </table>
+                <p style="color: green; font-weight: bold;">✅ Chính xác 1000px → 3 cột xếp hoàn hảo!</p>
+            </div>
+        </div>
+
+        <!-- Hướng dẫn sử dụng DevTools -->
+        <div class="section info-box">
+            <h2>🔧 Cách sử dụng DevTools để kiểm tra Box Model</h2>
+            <ol>
+                <li>Mở DevTools: Nhấn <kbd>F12</kbd> hoặc <kbd>Ctrl+Shift+I</kbd></li>
+                <li>Chọn tab <strong>Elements</strong> / <strong>Inspector</strong></li>
+                <li>Inspect element: Nhấp vào hộp muốn kiểm tra</li>
+                <li>Tìm tab <strong>Computed Styles</strong> / <strong>Box Model</strong></li>
+                <li>Xem diagram màu sắc:
+                    <ul>
+                        <li>🟠 Orange = Margin</li>
+                        <li>🟡 Yellow = Border</li>
+                        <li>🟢 Green = Padding</li>
+                        <li>🔵 Blue = Content</li>
+                    </ul>
+                </li>
+            </ol>
+            <p><strong>Số liệu từ DevTools cho phép xác minh lý thuyết!</strong></p>
+        </div>
+    </div>
+
+</body>
+</html>
