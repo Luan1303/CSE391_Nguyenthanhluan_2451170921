@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Layout - Phần C1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            background: white;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .problem-box {
+            background: #ffe0e0;
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .solution-box {
+            background: #e8f9ea;
+            border-left: 4px solid #51cf66;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }
+
+        .demo-section {
+            margin-top: 30px;
+        }
+
+        .demo-section h3 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .container {
+            width: 960px;
+            margin: 0 auto;
+            background: #f9f9f9;
+            border: 2px dashed #999;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .container-label {
+            font-weight: bold;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        /* ============================================================
+           SOLUTION 1: BROKEN (Original - Content-Box)
+           ============================================================ */
+        .broken-container {
+            width: 960px;
+            margin: 0 auto 30px;
+            background: #fff3cd;
+            border: 2px solid #ff9800;
+            padding: 10px;
+        }
+
+        .broken-container .sidebar {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #d32f2f;
+            float: left;
+            background: #ffebee;
+        }
+
+        .broken-container .content {
+            width: 660px;
+            padding: 30px;
+            border: 1px solid #d32f2f;
+            float: left;
+            background: #fff9c4;
+        }
+
+        .sidebar-label,
+        .content-label {
+            font-weight: bold;
+            color: #666;
+            font-size: 13px;
+        }
+
+        /* ============================================================
+           SOLUTION 2: FIXED WITH BORDER-BOX
+           ============================================================ */
+        .solution1-container {
+            width: 960px;
+            margin: 0 auto 30px;
+            background: #e8f5e9;
+            border: 2px solid #51cf66;
+            padding: 10px;
+            overflow: auto;
+        }
+
+        .solution1-container .sidebar {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #2e7d32;
+            float: left;
+            background: #c8e6c9;
+            box-sizing: border-box;
+        }
+
+        .solution1-container .content {
+            width: 660px;
+            padding: 30px;
+            border: 1px solid #2e7d32;
+            float: left;
+            background: #a5d6a7;
+            box-sizing: border-box;
+        }
+
+        /* ============================================================
+           SOLUTION 3: FIXED WITHOUT BORDER-BOX (reduce width)
+           ============================================================ */
+        .solution2-container {
+            width: 960px;
+            margin: 0 auto 30px;
+            background: #e3f2fd;
+            border: 2px solid #1976d2;
+            padding: 10px;
+            overflow: auto;
+        }
+
+        .solution2-container .sidebar {
+            width: 260px;          /* Reduced from 300px */
+            padding: 20px;
+            border: 1px solid #1565c0;
+            float: left;
+            background: #bbdefb;
+        }
+
+        .solution2-container .content {
+            width: 600px;          /* Reduced from 660px */
+            padding: 30px;
+            border: 1px solid #1565c0;
+            float: left;
+            background: #90caf9;
+        }
+
+        .calculation-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+        }
+
+        .calculation-table th,
+        .calculation-table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .calculation-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .calculation-table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .calculation-table tr:hover {
+            background: #f0f7ff;
+        }
+
+        .error-text {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+
+        .success-text {
+            color: #388e3c;
+            font-weight: bold;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #d63384;
+        }
+
+        .explanation {
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #667eea;
+            margin: 15px 0;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        @media (max-width: 1024px) {
+            .container,
+            .broken-container,
+            .solution1-container,
+            .solution2-container {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Debug CSS Layout - Phần C1</h1>
+
+    <!-- ============================================================
+         PHẦN 1: PROBLEM ANALYSIS
+         ============================================================ -->
+    <div class="section">
+        <h2>Bước 1: Phân Tích Vấn Đề</h2>
+
+        <div class="problem-box">
+            <strong>❌ Vấn đề:</strong> Container rộng 960px, nhưng sidebar + content bị đẩy xuống dòng mới
+        </div>
+
+        <h3>Tính chiều rộng thực tế (content-box):</h3>
+
+        <table class="calculation-table">
+            <thead>
+                <tr>
+                    <th>Element</th>
+                    <th>Width</th>
+                    <th>Padding</th>
+                    <th>Border</th>
+                    <th>Thực tế</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Sidebar</strong></td>
+                    <td>300px</td>
+                    <td>20px × 2 = 40px</td>
+                    <td>1px × 2 = 2px</td>
+                    <td><span class="error-text">342px</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Content</strong></td>
+                    <td>660px</td>
+                    <td>30px × 2 = 60px</td>
+                    <td>1px × 2 = 2px</td>
+                    <td><span class="error-text">722px</span></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><strong>Tổng:</strong></td>
+                    <td><span class="error-text">1064px ❌ > 960px</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="explanation">
+            <strong>💡 Giải thích:</strong>
+            <p>Khi dùng <code>box-sizing: content-box</code> (mặc định):
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Sidebar: 300 + 40 (padding) + 2 (border) = <strong>342px</strong></li>
+                <li>Content: 660 + 60 (padding) + 2 (border) = <strong>722px</strong></li>
+                <li>Tổng: 342 + 722 = <strong>1064px > 960px</strong> ❌</li>
+                <li>Kết quả: Content bị float left nhưng không đủ chỗ → wrap xuống dòng</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         PHẦN 2: BROKEN LAYOUT (DEMO)
+         ============================================================ -->
+    <div class="section demo-section">
+        <h2>Phần 2: Layout Bị Vỡ (Original Code)</h2>
+
+        <p style="margin-bottom: 15px; color: #ff6b6b; font-weight: bold;">
+            ❌ Sidebar + Content không vừa container → Content đẩy xuống
+        </p>
+
+        <div class="broken-container clearfix">
+            <div class="container-label">Container: 960px (border-dashed)</div>
+            <div class="sidebar">
+                <div class="sidebar-label">Sidebar</div>
+                <p style="font-size: 13px; margin-top: 10px; color: #333;">
+                    <strong>Width:</strong> 300px<br>
+                    <strong>Padding:</strong> 20px<br>
+                    <strong>Border:</strong> 1px<br>
+                    <strong>Thực tế:</strong> 342px
+                </p>
+            </div>
+            <div class="content">
+                <div class="content-label">Content</div>
+                <p style="font-size: 13px; margin-top: 10px; color: #333;">
+                    <strong>Width:</strong> 660px<br>
+                    <strong>Padding:</strong> 30px<br>
+                    <strong>Border:</strong> 1px<br>
+                    <strong>Thực tế:</strong> 722px
+                </p>
+            </div>
+        </div>
+
+        <div style="background: #fff3cd; padding: 10px; margin-top: 10px; border-radius: 4px; color: #ff6b6b; font-weight: bold;">
+            👆 Quan sát: Content bị wrap xuống dòng (không vừa cạnh nhau)
+        </div>
+    </div>
+
+    <!-- ============================================================
+         PHẦN 3: SOLUTION 1 - WITH BORDER-BOX
+         ============================================================ -->
+    <div class="section demo-section">
+        <h2>Phần 3: Cách Sửa #1 - Dùng border-box</h2>
+
+        <div class="solution-box">
+            <strong>✅ Giải pháp:</strong> Thêm <code>box-sizing: border-box</code>
+        </div>
+
+        <div style="background: #f5f5f5; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+            <strong>CSS Code:</strong>
+            <pre style="background: white; padding: 10px; margin-top: 10px; border-left: 3px solid #667eea; overflow-x: auto;"><code>.sidebar {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    float: left;
+    <span style="background: #ffff00;">box-sizing: border-box;</span>  /* ADD THIS */
+}
+
+.content {
+    width: 660px;
+    padding: 30px;
+    border: 1px solid #ccc;
+    float: left;
+    <span style="background: #ffff00;">box-sizing: border-box;</span>  /* ADD THIS */
+}</code></pre>
+        </div>
+
+        <table class="calculation-table">
+            <thead>
+                <tr>
+                    <th>Element</th>
+                    <th>Width (Set)</th>
+                    <th>Bao gồm</th>
+                    <th>Thực tế</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Sidebar</strong></td>
+                    <td>300px</td>
+                    <td>content + padding + border</td>
+                    <td><span class="success-text">300px</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Content</strong></td>
+                    <td>660px</td>
+                    <td>content + padding + border</td>
+                    <td><span class="success-text">660px</span></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><strong>Tổng:</strong></td>
+                    <td><span class="success-text">960px ✅ = 960px</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="explanation">
+            <strong>✅ Kết quả:</strong> Với <code>box-sizing: border-box</code>, width đã bao gồm padding + border → tổng = 960px chính xác!
+        </div>
+
+        <p style="margin-top: 20px; margin-bottom: 15px; color: #388e3c; font-weight: bold;">
+            ✅ Sidebar + Content vừa hoàn hảo cạnh nhau
+        </p>
+
+        <div class="solution1-container clearfix">
+            <div class="container-label">Container: 960px (border-solid xanh)</div>
+            <div class="sidebar">
+                <div class="sidebar-label">Sidebar (border-box)</div>
+                <p style="font-size: 13px; margin-top: 10px; color: #333;">
+                    <strong>Width:</strong> 300px<br>
+                    <strong>Box-sizing:</strong> border-box<br>
+                    <strong>Thực tế:</strong> 300px ✅
+                </p>
+            </div>
+            <div class="content">
+                <div class="content-label">Content (border-box)</div>
+                <p style="font-size: 13px; margin-top: 10px; color: #333;">
+                    <strong>Width:</strong> 660px<br>
+                    <strong>Box-sizing:</strong> border-box<br>
+                    <strong>Thực tế:</strong> 660px ✅
+                </p>
+            </div>
+        </div>
+
+        <div style="background: #e8f5e9; padding: 10px; margin-top: 10px; border-radius: 4px; color: #388e3c; font-weight: bold;">
+            ✅ Hoàn hảo! Sidebar + Content xếp nằm ngang = 960px
+        </div>
+    </div>
+
+    <!-- ============================================================
+         PHẦN 4: SOLUTION 2 - WITHOUT BORDER-BOX (reduce width)
+         ============================================================ -->
+    <div class="section demo-section">
+        <h2>Phần 4: Cách Sửa #2 - Không dùng border-box (Giảm width)</h2>
+
+        <div class="solution-box">
+            <strong>✅ Giải pháp:</strong> Giảm width để tính vào padding + border
+        </div>
+
+        <div style="background: #f5f5f5; padding: 15px; border-radius: 4px; margin-bottom: 15px;">
+            <strong>CSS Code:</strong>
+            <pre style="background: white; padding: 10px; margin-top: 10px; border-left: 3px solid #667eea; overflow-x: auto;"><code>.sidebar {
+    width: 260px;  /* Reduced from 300px */
+    padding: 20px;
+    border: 1px solid #ccc;
+    float: left;
+    /* NO box-sizing needed */
+}
+
+.content {
+    width: 600px;  /* Reduced from 660px */
+    padding: 30px;
+    border: 1px solid #ccc;
+    float: left;
+    /* NO box-sizing needed */
+}</code></pre>
+        </div>
+
+        <table class="calculation-table">
+            <thead>
+                <tr>
+                    <th>Element</th>
+                    <th>Width (Reduced)</th>
+                    <th>Padding</th>
+                    <th>Border</th>
+                    <th>Thực tế</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Sidebar</strong></td>
+                    <td>260px</td>
+                    <td>20×2=40px</td>
+                    <td>1×2=2px</td>
+                    <td><span class="success-text">302px</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Content</strong></td>
+                    <td>600px</td>
+                    <td>30×2=60px</td>
+                    <td>1×2=2px</td>
+                    <td><span class="success-text">662px</span></td>
+                </tr>
+                <tr>
+                    <td colspan="4"><strong>Tổng:</strong></td>
+                    <td><span class="success-text">964px ≈ 960px</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="explanation">
+            <strong>✅ Cách tính:</strong>
+            <ul style="margin-left: 20px; margin-top: 10px;">
+                <li>Sidebar: 260 + 40 + 2 = 302px</li>
+                <li>Content: 600 + 60 + 2 = 662px</li>
+                <li>Tổng: 302 + 662 = 964px ≈ 960px (có thể điều chỉnh thêm)</li>
+            </ul>
+        </div>
+
+        <p style="margin-top: 20px; margin-bottom: 15px; color: #1565c0; font-weight: bold;">
+            ✅ Sidebar + Content vừa cạnh nhau (không dùng border-box)
+        </p>
+
+        <div class="solution2-container clearfix">
+            <div class="container-label">Container: 960px (border-solid xanh)</div>
+            <div class="sidebar">
+                <div class="sidebar-label">Sidebar (width giảm)</div>
+                <p style="font-size: 13px; margin-top: 10px; color: #333;">
+                    <strong>Width:</strong> 260px<br>
+                    <strong>Padding:</strong> 20px<br>
+                    <strong>Thực tế:</strong> 302px ✅
+                </p>
+            </div>
+            <div class="content">
+                <div class="content-label">Content (width giảm)</div>
+                <p style="font-size: 13px; margin-top: 10px; color: #333;">
+                    <strong>Width:</strong> 600px<br>
+                    <strong>Padding:</strong> 30px<br>
+                    <strong>Thực tế:</strong> 662px ✅
+                </p>
+            </div>
+        </div>
+
+        <div style="background: #e3f2fd; padding: 10px; margin-top: 10px; border-radius: 4px; color: #1565c0; font-weight: bold;">
+            ✅ Hoạt động! Nhưng cách tính phức tạp hơn
+        </div>
+    </div>
+
+    <!-- ============================================================
+         PHẦN 5: COMPARISON & BEST PRACTICE
+         ============================================================ -->
+    <div class="section">
+        <h2>Phần 5: So Sánh 2 Cách Sửa</h2>
+
+        <table class="calculation-table">
+            <thead>
+                <tr>
+                    <th>Tiêu chí</th>
+                    <th>Cách #1 (border-box)</th>
+                    <th>Cách #2 (giảm width)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Dễ hiểu</strong></td>
+                    <td>✅ Rất dễ (1 dòng)</td>
+                    <td>❌ Phức tạp (phải tính)</td>
+                </tr>
+                <tr>
+                    <td><strong>Bảo trì</strong></td>
+                    <td>✅ Dễ (không cần tính lại)</td>
+                    <td>❌ Khó (đổi padding phải tính lại width)</td>
+                </tr>
+                <tr>
+                    <td><strong>Đề xuất</strong></td>
+                    <td>✅✅✅ <strong>BEST PRACTICE</strong></td>
+                    <td>⚠️ Tránh nếu có thể</td>
+                </tr>
+                <tr>
+                    <td><strong>Thực tế</strong></td>
+                    <td>✅ Được dùng rộng rãi</td>
+                    <td>❌ Legacy code (old IE)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="explanation" style="margin-top: 20px;">
+            <strong>🎯 Kết luận Best Practice:</strong>
+            <p>Luôn dùng <code>* { box-sizing: border-box; }</code> ở đầu project CSS:</p>
+            <pre style="background: white; padding: 10px; margin-top: 10px; border-left: 3px solid #667eea; overflow-x: auto;"><code>* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}</code></pre>
+            <p style="margin-top: 10px;">Lợi ích:</p>
+            <ul style="margin-left: 20px;">
+                <li>✅ Width = tất cả (content + padding + border)</li>
+                <li>✅ Dễ tính, dễ dự đoán</li>
+                <li>✅ Layout không bị vỡ vì padding</li>
+                <li>✅ Giảm BUG, dễ maintain</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
