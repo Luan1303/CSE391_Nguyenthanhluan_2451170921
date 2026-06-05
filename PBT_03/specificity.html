@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Specificity Battle - Phần B3</title>
+    <link rel="stylesheet" href="specificity.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 CSS Specificity Battle - Phần B3</h1>
+        
+        <div class="battle-info">
+            <h2>Cuộc chiến CSS: 10 Rules Cùng Target 1 Element</h2>
+            <p>Các rule CSS dưới đây được sắp xếp <strong>từ LOW (thấp) đến HIGH (cao)</strong> theo Specificity.</p>
+            <p>Mục đích: Xem rule nào "thắng" và áp dụng màu cuối cùng.</p>
+        </div>
+
+        <!-- Element cần styling -->
+        <div class="battle-element">
+            <span id="main-text" class="text colored special-text active">Hello World</span>
+        </div>
+
+        <div class="results-section">
+            <h2>📊 Bảng CSS Rules (từ thấp đến cao theo Specificity)</h2>
+            
+            <table class="rules-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>CSS Rule (Selector)</th>
+                        <th>Specificity Score</th>
+                        <th>Color</th>
+                        <th>Giải thích</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><code>span { color: black; }</code></td>
+                        <td><strong>(0, 0, 1)</strong></td>
+                        <td style="background: black; color: white;">■ Black</td>
+                        <td>Element selector</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><code>span:first-of-type { color: blue; }</code></td>
+                        <td><strong>(0, 1, 1)</strong></td>
+                        <td style="background: blue; color: white;">■ Blue</td>
+                        <td>Element + Pseudo-class</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td><code>.text { color: green; }</code></td>
+                        <td><strong>(0, 1, 0)</strong></td>
+                        <td style="background: green; color: white;">■ Green</td>
+                        <td>Class selector</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td><code>.colored { color: purple; }</code></td>
+                        <td><strong>(0, 1, 0)</strong></td>
+                        <td style="background: purple; color: white;">■ Purple</td>
+                        <td>Class selector (same as #3)</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td><code>.text.colored { color: orange; }</code></td>
+                        <td><strong>(0, 2, 0)</strong></td>
+                        <td style="background: orange; color: white;">■ Orange</td>
+                        <td>2 Class selectors combined</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td><code>span.special-text { color: #ff1493; }</code></td>
+                        <td><strong>(0, 1, 1)</strong></td>
+                        <td style="background: #ff1493; color: white;">■ Deep Pink</td>
+                        <td>Element + Class selector</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td><code>.special-text.active { color: #00ced1; }</code></td>
+                        <td><strong>(0, 2, 0)</strong></td>
+                        <td style="background: #00ced1; color: white;">■ Dark Turquoise</td>
+                        <td>2 Class selectors combined</td>
+                    </tr>
+                    <tr>
+                        <td>8</td>
+                        <td><code>div span.text { color: #ff6347; }</code></td>
+                        <td><strong>(0, 1, 2)</strong></td>
+                        <td style="background: #ff6347; color: white;">■ Tomato</td>
+                        <td>Descendant + Element + Class</td>
+                    </tr>
+                    <tr>
+                        <td>9</td>
+                        <td><code>#main-text { color: #1e90ff; }</code></td>
+                        <td><strong>(1, 0, 0)</strong></td>
+                        <td style="background: #1e90ff; color: white;">■ Dodger Blue</td>
+                        <td>ID selector (rất mạnh!)</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td><code>span[id="main-text"] { color: #228b22; }</code></td>
+                        <td><strong>(0, 1, 1)</strong></td>
+                        <td style="background: #228b22; color: white;">■ Forest Green</td>
+                        <td>Attribute selector + Element</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="analysis-section">
+            <h2>🔍 Phân tích Kết quả</h2>
+            
+            <div class="analysis-box">
+                <h3>❓ Element sẽ hiển thị màu gì?</h3>
+                <p class="answer">✅ <strong>Đỏ Dodger Blue (#1e90ff)</strong> từ Rule 9</p>
+                <p><strong>Lý do:</strong></p>
+                <ul>
+                    <li>Rule 9 có ID selector → Specificity <strong>(1, 0, 0)</strong></li>
+                    <li>ID selector có độ ưu tiên cao nhất trong 10 rules này</li>
+                    <li>So sánh: (1,0,0) > (0,2,0) > (0,1,2) > (0,1,1) > (0,1,0) > (0,0,1)</li>
+                    <li>Mặc dù Rule 9 được định nghĩa sớm, nhưng specificity cao → nó "thắng"</li>
+                </ul>
+            </div>
+
+            <div class="analysis-box">
+                <h3>❓ Nếu thay đổi thứ tự CSS trong file?</h3>
+                <p class="answer">❌ <strong>Kết quả KHÔNG đổi</strong> → Vẫn là Dodger Blue</p>
+                <p><strong>Giải thích:</strong></p>
+                <ul>
+                    <li><strong>Specificity > Thứ tự:</strong> Độ ưu tiên (specificity) quyết định kết quả, không phải vị trí trong file</li>
+                    <li>Ngay cả nếu đặt Rule 9 cuối, nó vẫn thắng vì (1,0,0) > tất cả các rules khác</li>
+                    <li>Thứ tự chỉ quan trọng khi specificity <strong>BẰNG NHAU</strong> → khi đó rule sau cùng thắng</li>
+                    <li><strong>Ví dụ:</strong> Nếu cả 2 rules đều là (0,1,0), rule được định nghĩa sau sẽ áp dụng</li>
+                </ul>
+            </div>
+
+            <div class="analysis-box important">
+                <h3>⚠️ Trường hợp Đặc biệt: !important</h3>
+                <p>Nếu thêm <code>!important</code> vào Rule 1:</p>
+                <pre><code>span { color: black !important; }</code></pre>
+                <p><strong>Kết quả:</strong> <span class="important-text">Element sẽ thay đổi thành BLACK</span></p>
+                <p><strong>Lý do:</strong> <code>!important</code> có độ ưu tiên cao hơn bất kỳ selector nào (ngoại trừ !important khác)</p>
+            </div>
+        </div>
+
+        <div class="specificity-tips">
+            <h2>💡 Mẹo ghi nhớ Specificity</h2>
+            <div class="tip-grid">
+                <div class="tip">
+                    <h4>Công thức Specificity</h4>
+                    <p><strong>(a, b, c)</strong></p>
+                    <ul>
+                        <li><strong>a</strong> = ID (#)</li>
+                        <li><strong>b</strong> = Class (.) + Pseudo-class (:)</li>
+                        <li><strong>c</strong> = Element</li>
+                    </ul>
+                </div>
+                <div class="tip">
+                    <h4>Quy tắc So sánh</h4>
+                    <p>(1,0,0) > (0,∞,∞)</p>
+                    <ul>
+                        <li>1 ID > 1000 classes</li>
+                        <li>1 ID > 1000 elements</li>
+                        <li>100 classes > 10000 elements</li>
+                    </ul>
+                </div>
+                <div class="tip">
+                    <h4>Inline Style</h4>
+                    <p><strong>(1,0,0,0)</strong> Inline > All selectors</p>
+                    <pre><code>&lt;span style="color: red;"&gt;</code></pre>
+                </div>
+                <div class="tip">
+                    <h4>!important</h4>
+                    <p><strong>Cao nhất!</strong></p>
+                    <p>Tránh dùng trừ khi thực sự cần (bad practice)</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="devtools-guide">
+            <h2>🔧 Kiểm tra trong DevTools</h2>
+            <ol>
+                <li>Mở DevTools: <kbd>F12</kbd> hoặc <kbd>Ctrl+Shift+I</kbd></li>
+                <li>Inspect "Hello World" element</li>
+                <li>Tìm tab <strong>Styles</strong> / <strong>Computed</strong></li>
+                <li>Xem tất cả CSS rules áp dụng cho element</li>
+                <li>Các rules bị "gạch đi" = bị override bởi rule khác (specificity cao hơn)</li>
+                <li>Rule không bị gạch = rule "thắng" → được áp dụng cuối cùng</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html>
