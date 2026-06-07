@@ -1,0 +1,85 @@
+/* SCSS Mixins */
+
+@import 'variables';
+
+/* Responsive Breakpoint Mixin */
+@mixin respond-to($breakpoint) {
+    @if $breakpoint == 'sm' {
+        @media (min-width: $breakpoint-sm) { @content; }
+    }
+    @else if $breakpoint == 'md' {
+        @media (min-width: $breakpoint-md) { @content; }
+    }
+    @else if $breakpoint == 'lg' {
+        @media (min-width: $breakpoint-lg) { @content; }
+    }
+    @else if $breakpoint == 'xl' {
+        @media (min-width: $breakpoint-xl) { @content; }
+    }
+}
+
+/* Flex Center - Both horizontally and vertically */
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Flex Column - Column direction with center alignment */
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Card Shadow - Elevation effect */
+@mixin card-shadow {
+    box-shadow: $shadow-sm;
+    transition: box-shadow $transition-base;
+
+    &:hover {
+        box-shadow: $shadow-md;
+    }
+}
+
+/* Smooth Transition */
+@mixin smooth-transition($property: all) {
+    transition: $property $transition-base;
+}
+
+/* Button Reset */
+@mixin button-reset {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* Responsive Image */
+@mixin responsive-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Truncate Text */
+@mixin truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Grid Responsive */
+@mixin grid-responsive($cols-mobile: 1, $cols-tablet: 2, $cols-desktop: 4) {
+    display: grid;
+    grid-template-columns: repeat($cols-mobile, 1fr);
+    gap: $spacing-lg;
+
+    @include respond-to('md') {
+        grid-template-columns: repeat($cols-tablet, 1fr);
+    }
+
+    @include respond-to('lg') {
+        grid-template-columns: repeat($cols-desktop, 1fr);
+    }
+}

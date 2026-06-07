@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positioning Playground</title>
+    <link rel="stylesheet" href="positioning.css">
+</head>
+<body>
+    <!-- Fixed Header -->
+    <header class="fixed-header">
+        <div class="header-content">
+            <div class="logo">Logo</div>
+            <nav class="nav">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sticky Sidebar -->
+    <aside class="sticky-sidebar">
+        <h3>Filters</h3>
+        <ul>
+            <li><input type="checkbox"> Electronics</li>
+            <li><input type="checkbox"> Fashion</li>
+            <li><input type="checkbox"> Books</li>
+            <li><input type="checkbox"> Sports</li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <h1>Positioning Playground</h1>
+        
+        <!-- Product Cards with Badge -->
+        <div class="products">
+            <article class="card">
+                <div class="card-image">Product 1</div>
+                <h3>Premium Headphones</h3>
+                <p>$99.99</p>
+                <button>Add to Cart</button>
+                <span class="badge">HOT</span>
+            </article>
+
+            <article class="card">
+                <div class="card-image">Product 2</div>
+                <h3>Wireless Speaker</h3>
+                <p>$79.99</p>
+                <button>Add to Cart</button>
+                <span class="badge">HOT</span>
+            </article>
+
+            <article class="card">
+                <div class="card-image">Product 3</div>
+                <h3>Smart Watch</h3>
+                <p>$199.99</p>
+                <button>Add to Cart</button>
+            </article>
+
+            <article class="card">
+                <div class="card-image">Product 4</div>
+                <h3>Phone Case</h3>
+                <p>$29.99</p>
+                <button>Add to Cart</button>
+                <span class="badge">HOT</span>
+            </article>
+        </div>
+
+        
+    </main>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+</body>
+</html>

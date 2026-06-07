@@ -54,7 +54,7 @@ Dự đoán: Browser chặn submit vì độ dài nhỏ hơn minlength 8, thông
 
 Kết quả thực tế: Khi submit form có cả 5 trường, browser dừng ở trường invalid đầu tiên (Case 1) và hiển thị cảnh báo required. Đây là hành vi validation của HTML5: kiểm tra tuần tự và ngăn submit nếu có trường invalid. Đã tạo file `validation_test.html` và chụp màn hình kết quả tại `screenshots/validation_test_submit.png`.
 
-Câu A3: (Accessibility)
+###Câu A3: (Accessibility)
 1. `<label for="email">` quan trọng cho screen reader vì nó tạo tên truy cập cho input và liên kết nhãn với control. Screen reader đọc label khi người dùng focus vào input, giúp người dùng khiếm thị hiểu mục đích của trường.
 2. Dùng `<fieldset>` + `<legend>` khi nhóm nhiều control liên quan lại với nhau, ví dụ nhóm thông tin giao hàng hoặc lựa chọn phương thức thanh toán. Cụ thể:
    <fieldset>
